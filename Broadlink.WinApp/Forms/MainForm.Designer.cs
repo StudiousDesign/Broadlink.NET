@@ -54,7 +54,7 @@
             // 
             // toolStrip1
             // 
-            this.toolStrip1.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            resources.ApplyResources(this.toolStrip1, "toolStrip1");
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.btnLogClean,
             this.toolStripSeparator2,
@@ -69,47 +69,37 @@
             this.btnKomutlariKaydet,
             this.toolStripSeparator4,
             this.btnIceAktar});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(805, 25);
-            this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
             // 
             // btnLogClean
             // 
             this.btnLogClean.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnLogClean.Image = ((System.Drawing.Image)(resources.GetObject("btnLogClean.Image")));
-            this.btnLogClean.ImageTransparentColor = System.Drawing.Color.Magenta;
+            resources.ApplyResources(this.btnLogClean, "btnLogClean");
             this.btnLogClean.Name = "btnLogClean";
-            this.btnLogClean.Size = new System.Drawing.Size(66, 22);
-            this.btnLogClean.Text = "Log Temizle";
             this.btnLogClean.Click += new System.EventHandler(this.btnLogClean_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
+            resources.ApplyResources(this.toolStripSeparator2, "toolStripSeparator2");
             // 
             // cmbDevices
             // 
             this.cmbDevices.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDevices.Name = "cmbDevices";
-            this.cmbDevices.Size = new System.Drawing.Size(121, 25);
+            resources.ApplyResources(this.cmbDevices, "cmbDevices");
             // 
             // btnConnect
             // 
             this.btnConnect.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnConnect.Image = ((System.Drawing.Image)(resources.GetObject("btnConnect.Image")));
-            this.btnConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
+            resources.ApplyResources(this.btnConnect, "btnConnect");
             this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(68, 22);
-            this.btnConnect.Text = "Tarama Yap";
             this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            resources.ApplyResources(this.toolStripSeparator3, "toolStripSeparator3");
             // 
             // btnMenuOgren
             // 
@@ -118,89 +108,68 @@
             this.btnIR_Learn,
             this.btnRF_Learn,
             this.btnLearnCancel});
-            this.btnMenuOgren.Enabled = false;
-            this.btnMenuOgren.Image = ((System.Drawing.Image)(resources.GetObject("btnMenuOgren.Image")));
-            this.btnMenuOgren.ImageTransparentColor = System.Drawing.Color.Magenta;
+            resources.ApplyResources(this.btnMenuOgren, "btnMenuOgren");
             this.btnMenuOgren.Name = "btnMenuOgren";
-            this.btnMenuOgren.Size = new System.Drawing.Size(106, 22);
-            this.btnMenuOgren.Text = "Yeni Komut Öğren";
             // 
             // btnIR_Learn
             // 
             this.btnIR_Learn.Name = "btnIR_Learn";
-            this.btnIR_Learn.Size = new System.Drawing.Size(172, 22);
-            this.btnIR_Learn.Text = "Kızılötesi Öğren";
+            resources.ApplyResources(this.btnIR_Learn, "btnIR_Learn");
             this.btnIR_Learn.Click += new System.EventHandler(this.btnIR_Learn_Click);
             // 
             // btnRF_Learn
             // 
             this.btnRF_Learn.Name = "btnRF_Learn";
-            this.btnRF_Learn.Size = new System.Drawing.Size(172, 22);
-            this.btnRF_Learn.Text = "RF Frekans Öğren";
+            resources.ApplyResources(this.btnRF_Learn, "btnRF_Learn");
             this.btnRF_Learn.Click += new System.EventHandler(this.btnRF_Learn_Click);
             // 
             // btnLearnCancel
             // 
             this.btnLearnCancel.Name = "btnLearnCancel";
-            this.btnLearnCancel.Size = new System.Drawing.Size(172, 22);
-            this.btnLearnCancel.Text = "Öğrenme Modu İptal";
+            resources.ApplyResources(this.btnLearnCancel, "btnLearnCancel");
             this.btnLearnCancel.Click += new System.EventHandler(this.btnLearnCancel_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(6, 25);
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
             // 
             // btnKomutGonder
             // 
             this.btnKomutGonder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnKomutGonder.Enabled = false;
-            this.btnKomutGonder.Image = ((System.Drawing.Image)(resources.GetObject("btnKomutGonder.Image")));
-            this.btnKomutGonder.ImageTransparentColor = System.Drawing.Color.Magenta;
+            resources.ApplyResources(this.btnKomutGonder, "btnKomutGonder");
             this.btnKomutGonder.Name = "btnKomutGonder";
-            this.btnKomutGonder.Size = new System.Drawing.Size(79, 22);
-            this.btnKomutGonder.Text = "Komut Gönder";
             this.btnKomutGonder.Click += new System.EventHandler(this.btnKomutGonder_Click);
             // 
             // cmbKomutListe
             // 
             this.cmbKomutListe.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbKomutListe.DropDownWidth = 200;
-            this.cmbKomutListe.Enabled = false;
+            resources.ApplyResources(this.cmbKomutListe, "cmbKomutListe");
             this.cmbKomutListe.Name = "cmbKomutListe";
-            this.cmbKomutListe.Size = new System.Drawing.Size(121, 25);
             // 
             // txtIRCount
             // 
+            resources.ApplyResources(this.txtIRCount, "txtIRCount");
             this.txtIRCount.Name = "txtIRCount";
-            this.txtIRCount.Size = new System.Drawing.Size(20, 25);
-            this.txtIRCount.Text = "1";
             // 
             // btnKomutlariKaydet
             // 
             this.btnKomutlariKaydet.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnKomutlariKaydet.Enabled = false;
-            this.btnKomutlariKaydet.Image = ((System.Drawing.Image)(resources.GetObject("btnKomutlariKaydet.Image")));
-            this.btnKomutlariKaydet.ImageTransparentColor = System.Drawing.Color.Magenta;
+            resources.ApplyResources(this.btnKomutlariKaydet, "btnKomutlariKaydet");
             this.btnKomutlariKaydet.Name = "btnKomutlariKaydet";
-            this.btnKomutlariKaydet.Size = new System.Drawing.Size(45, 22);
-            this.btnKomutlariKaydet.Text = "Kaydet";
             this.btnKomutlariKaydet.Click += new System.EventHandler(this.btnKomutlariKaydet_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(6, 25);
+            resources.ApplyResources(this.toolStripSeparator4, "toolStripSeparator4");
             // 
             // btnIceAktar
             // 
             this.btnIceAktar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.btnIceAktar.Enabled = false;
-            this.btnIceAktar.Image = ((System.Drawing.Image)(resources.GetObject("btnIceAktar.Image")));
-            this.btnIceAktar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            resources.ApplyResources(this.btnIceAktar, "btnIceAktar");
             this.btnIceAktar.Name = "btnIceAktar";
-            this.btnIceAktar.Size = new System.Drawing.Size(99, 22);
-            this.btnIceAktar.Text = "eControl İçe Aktar";
             this.btnIceAktar.Click += new System.EventHandler(this.btnIceAktar_Click);
             // 
             // timerSicaklik
@@ -211,27 +180,18 @@
             // txtLog
             // 
             this.txtLog.BackColor = System.Drawing.Color.Black;
-            this.txtLog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtLog.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            resources.ApplyResources(this.txtLog, "txtLog");
             this.txtLog.ForeColor = System.Drawing.Color.White;
-            this.txtLog.Location = new System.Drawing.Point(0, 25);
             this.txtLog.Name = "txtLog";
-            this.txtLog.Size = new System.Drawing.Size(805, 359);
-            this.txtLog.TabIndex = 2;
-            this.txtLog.Text = "";
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(805, 384);
             this.Controls.Add(this.txtLog);
             this.Controls.Add(this.toolStrip1);
-            this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.Name = "MainForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Tag = "Broadlink .NET | Oda sıcaklığı : {0}°C";
-            this.Text = "Broadlink .NET | Developed By K3M41";
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
