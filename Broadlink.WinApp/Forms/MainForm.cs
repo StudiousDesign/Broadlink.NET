@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Windows.Forms;
 
 namespace Broadlink.WinApp.Forms
@@ -12,6 +13,7 @@ namespace Broadlink.WinApp.Forms
     public partial class MainForm : Form
     {
         #region Fields
+        private ResourceManager _resourceManager;
         private RMDevice RMDevice;
         private List<Command> Commands;
         private Client DiscoverClient;
@@ -21,6 +23,9 @@ namespace Broadlink.WinApp.Forms
         public MainForm()
         {
             InitializeComponent();
+
+            _resourceManager = new ResourceManager("Broadlink.WinApp.Forms.MainForm", typeof(MainForm).Assembly);
+
             Icon = Icon.ExtractAssociatedIcon(Application.ExecutablePath);
             HelperMy.NotificationEvent += HelperMy_NotificationEvent;
         }
@@ -59,13 +64,13 @@ namespace Broadlink.WinApp.Forms
                     DiscoverClient = new Client();
                     DiscoverClient.DeviceHandler += Client_DeviceHandler;
                 }
-                HelperMy.Notification(Color.Gray, "Cihazlar aranıyor...");
+                HelperMy.Notification(Color.Gray, _resourceManager.GetString("TXT_INFO_SEARCHING"));
                 await DiscoverClient.DiscoverAsync();
-                btnConnect.Text = "Tarama Yap";
+                btnConnect.Text = _resourceManager.GetString("BTN_Connect_TEXT");
             }
             else if (cmbDevices.SelectedItem is RMDevice secim)
             {
-                HelperMy.Notification(Color.Gray, "Bağlantı kuruluyor...");
+                HelperMy.Notification(Color.Gray, _resourceManager.GetString("TXT_INFO_ESTABLISHING_CONNECTION"));
                 RMDevice = secim as RMDevice;
                 if (!RMDevice.IsEventsReady)
                 {
@@ -80,10 +85,10 @@ namespace Broadlink.WinApp.Forms
                 await RMDevice.AuthorizeAsync();
                 KomutYukle();
                 btnMenuOgren.Enabled = cmbKomutListe.Enabled = btnIR_Learn.Enabled = btnRF_Learn.Enabled = btnLearnCancel.Enabled = btnKomutGonder.Enabled = btnKomutlariKaydet.Enabled = btnIceAktar.Enabled = true;
-                btnConnect.Text = "Bağlanıldı";
+                btnConnect.Text = _resourceManager.GetString("BTN_Connect__CONNECTED_TEXT");
             }
             else
-                HelperMy.Notification(Color.Red, "Yazılıma uyumlu cihaz tespit edilemedi!");
+                HelperMy.Notification(Color.Red, _resourceManager.GetString("TXT_ERROR_NO_COMPATIBLE_DEVICES"));
 
             btnConnect.Enabled = true;
         }
@@ -92,23 +97,23 @@ namespace Broadlink.WinApp.Forms
             if (RMDevice == null) return;
             btnIR_Learn.Enabled = false;
             await RMDevice.EnterIRLearningModeAsync();
-            HelperMy.Notification(Color.RoyalBlue, "IR Kızılötesi Öğrenme modu etkinleştirildi.");
+            HelperMy.Notification(Color.RoyalBlue, _resourceManager.GetString("TXT_INFO_IRLEARNING_MODE_ACTIVE"));
         }
         private async void btnRF_Learn_Click(object sender, EventArgs e)
         {
             if (RMDevice == null) return;
             btnRF_Learn.Enabled = false;
             await RMDevice.EnterRFLearningModeAsync();
-            HelperMy.Notification(Color.RoyalBlue, "RF Frekans Öğrenme modu etkinleştirildi.");
-            HelperMy.Notification(Color.Yellow, "RF Frekans Tarama [1/2]");
-            HelperMy.Notification(Color.Yellow, "[Düğmeye basılı tutunuz!]");
+            HelperMy.Notification(Color.RoyalBlue, _resourceManager.GetString("TXT_INFO_RFLEARNING_MODE_ACTIVE"));
+            HelperMy.Notification(Color.Yellow, _resourceManager.GetString("TXT_INFO_RF_FREQ_SCAN_1of2"));
+            HelperMy.Notification(Color.Yellow, _resourceManager.GetString("TXT_INFO_KEEP_BUTTON_PRESSED"));
         }
         private async void btnLearnCancel_Click(object sender, EventArgs e)
         {
             if (RMDevice == null) return;
             btnIR_Learn.Enabled = btnRF_Learn.Enabled = true;
             await RMDevice.ExitLearningModeAsync();
-            HelperMy.Notification(Color.RoyalBlue, "Öğrenme modundan çıkıldı.");
+            HelperMy.Notification(Color.RoyalBlue, _resourceManager.GetString("TXT_INFO_LEARNING_MODE_EXITED"));
         }
         private async void btnKomutGonder_Click(object sender, EventArgs e)
         {
@@ -118,18 +123,18 @@ namespace Broadlink.WinApp.Forms
             if (txtIRCount.Text.IsNumeric() && txtIRCount.Text != "1")
                 command[1] = (byte)(Convert.ToByte(txtIRCount.Text) - 1);
             await RMDevice.SendRemoteCommandAsync(command);
-            HelperMy.Notification(Color.White, "Komut gönderildi : {0}", selected);
+            HelperMy.Notification(Color.White, _resourceManager.GetString("TXT_INFO_COMMAND_SENT_COUNT"), selected);
         }
         private void btnKomutlariKaydet_Click(object sender, EventArgs e) => File.WriteAllText(CommandFilePath, Commands.ToJson(), new System.Text.UTF8Encoding(false));
         private async void timerSicaklik_Tick(object sender, EventArgs e) => await RMDevice?.GetTemperatureAsync();
         private void btnIceAktar_Click(object sender, EventArgs e)
         {
-            HelperMy.Notification(Color.RoyalBlue, "Broadlink eControl uygulamasındaki verileri içe aktarma");
-            HelperMy.Notification(Color.White, "1) Uygulamadaki menüden 'Paylaş' butonuna tıklayınız.");
-            HelperMy.Notification(Color.White, "2) 'Ağdaki başka bir telefon ile paylaşın' butonuna tıklayınız.");
-            HelperMy.Notification(Color.White, "3) 'İptal' butonuna tıklayınız.");
-            HelperMy.Notification(Color.White, "4) Telefon hafızasında bulunan aşağıdaki dosyaları bilgisayarınıza kopyalayınız.");
-            HelperMy.Notification(Color.White, "\tKlasör : /broadlink/newremote/SharedData");
+            HelperMy.Notification(Color.RoyalBlue, _resourceManager.GetString("TXT_IMPORT_DATA"));
+            HelperMy.Notification(Color.White, _resourceManager.GetString("TXT_IMPORT_DATA_STEP_1"));
+            HelperMy.Notification(Color.White, _resourceManager.GetString("TXT_IMPORT_DATA_STEP_2"));
+            HelperMy.Notification(Color.White, _resourceManager.GetString("TXT_IMPORT_DATA_STEP_3"));
+            HelperMy.Notification(Color.White, _resourceManager.GetString("TXT_IMPORT_DATA_STEP_4"));
+            HelperMy.Notification(Color.White, _resourceManager.GetString("TXT_IMPORT_DATA_STEP_5"));
             HelperMy.Notification(Color.White, "\t* jsonDevice");
             HelperMy.Notification(Color.White, "\t* jsonButton");
             HelperMy.Notification(Color.White, "\t* jsonIrCode");
@@ -137,7 +142,7 @@ namespace Broadlink.WinApp.Forms
             var model = NET.SharedData.CodeInfo.GetSharedData();
             if (model == null || model.Length == 0)
             {
-                HelperMy.Notification(Color.Red, "Veri bulunamadı!");
+                HelperMy.Notification(Color.Red, _resourceManager.GetString("TXT_ERR_NO_DATA_FOUND"));
                 return;
             }
             if (Commands == null)
@@ -167,11 +172,11 @@ namespace Broadlink.WinApp.Forms
             {
                 if (!cmbDevices.Items.Cast<object>().Any(i => (i is RMDevice secim && secim.EndPoint.Address == device.EndPoint.Address)))
                 {
-                    HelperMy.Notification(Color.Lime, "Cihaz bulundu : {0}", device);
+                    HelperMy.Notification(Color.Lime, _resourceManager.GetString("TXT_INFO_DEVICE_FOUND"), device);
                     cmbDevices.Items.Add(device);
                     cmbDevices.SelectedIndex = 0;
                 }
-                btnConnect.Text = "Bağlan";
+                btnConnect.Text = _resourceManager.GetString("BTN_TXT_CONNECT");
                 btnConnect_Click(null, null);
             });
         }
@@ -190,8 +195,8 @@ namespace Broadlink.WinApp.Forms
         }
         private void RMDevice_OnRawRFDataSecond(object sender, byte[] data)
         {
-            HelperMy.Notification(Color.Yellow, "RF Frekans Tarama [2/2]");
-            HelperMy.Notification(Color.Yellow, "[Aralarında bir duraklama ile RF düğmesine birden çok kez basın]");
+            HelperMy.Notification(Color.Yellow, _resourceManager.GetString("TXT_INFO_RF_FREQ_SCAN_2of2"));
+            HelperMy.Notification(Color.Yellow, _resourceManager.GetString("TXT_PRESS_RF_BUTTON"));
         }
         private void RMDevice_OnTemperature(object sender, float temperature)
         {
@@ -206,7 +211,7 @@ namespace Broadlink.WinApp.Forms
         {
             this.MaybeInvoke(() =>
             {
-                txtLog.AppendLine(Color.Lime, "Cihaz kullanıma hazır.");
+                txtLog.AppendLine(Color.Lime, _resourceManager.GetString("TXT_INFO_DEVICE_READY"));
 
                 txtLog.AppendLine(Color.WhiteSmoke, new string('-', 34));
                 txtLog.AppendText(Color.LightGreen, "IP Adresi\t: ");
@@ -237,7 +242,7 @@ namespace Broadlink.WinApp.Forms
         }
         private void KomutEkle(string value)
         {
-            var inputBox = Microsoft.VisualBasic.Interaction.InputBox("Komut başlığı", "İsim giriniz :");
+            var inputBox = Microsoft.VisualBasic.Interaction.InputBox(_resourceManager.GetString("TXT_INFO_COMMAND_TITLE"), _resourceManager.GetString("TXT_INFO_ENTER_NAME"));
             if (inputBox.IsNullOrEmptyTrim()) return;
             var cmd = new Command
             {
